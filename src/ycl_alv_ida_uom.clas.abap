@@ -25,7 +25,7 @@ public section.
   PROTECTED SECTION.
 
   PRIVATE SECTION.
-    CONSTANTS mc_cds_view_name TYPE dbtabl VALUE 'zb_uom'.
+    CONSTANTS mc_cds_view_name TYPE dbtabl VALUE 'YDDMDP_06_040'.
 
     CLASS-DATA mo_instance TYPE REF TO YIF_ALV_IDA.
 
@@ -56,7 +56,7 @@ public section.
       IMPORTING
         row_object       TYPE REF TO if_salv_gui_row_data_ida
       RETURNING
-        VALUE(rs_result) TYPE zb_uom.
+        VALUE(rs_result) TYPE YVMDP_06_040.
 
     METHODS add_buttons_to_toolbar.
 

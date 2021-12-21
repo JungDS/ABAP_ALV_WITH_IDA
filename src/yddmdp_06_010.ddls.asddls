@@ -3,9 +3,11 @@
 @AbapCatalog.preserveKey: true
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'IDA Test 용도 Data Definition'
+@OData.publish: true
 define view YDDMDP_06_010 as select from ytmdp_06_010 {
     key mandt as Mandt,
     key matnr as Matnr,
+    maktx_test as Maktx,
     mtart as Mtart,
     matkl as Matkl,
     meins as Meins,

@@ -149,7 +149,7 @@ CLASS YCL_ALV_IDA_010 IMPLEMENTATION.
             iv_cds_view_name               = mc_cds_view_name
 *           io_gui_container               =
 *           io_calc_field_handler          =
-      ).
+        ).
       CATCH cx_salv_db_connection.
       CATCH cx_salv_db_table_not_supported.
       CATCH cx_salv_ida_contract_violation.
@@ -160,12 +160,13 @@ CLASS YCL_ALV_IDA_010 IMPLEMENTATION.
 
   METHOD GET_INSTANCE.
     IF MO_INSTANCE IS NOT BOUND.
-      MO_INSTANCE = NEW YCL_ALV_IDA_010(
-          IT_MATNR = IT_MATNR
-          IT_MTART = IT_MTART ).
+      FREE MO_INSTANCE.
     ENDIF.
 
-    RO_RESULT = MO_INSTANCE.
+    RO_RESULT = MO_INSTANCE = NEW YCL_ALV_IDA_010(
+        IT_MATNR = IT_MATNR
+        IT_MTART = IT_MTART ).
+
   ENDMETHOD.
 
 
@@ -214,11 +215,16 @@ CLASS YCL_ALV_IDA_010 IMPLEMENTATION.
   METHOD PROVIDE_SELECT_OPTIONS.
     DATA(lo_collector) = NEW cl_salv_range_tab_collector( ).
 
-*    lo_collector->add_ranges_for_name(
-*      iv_name = 'UNIT_OF_MEASUREMENT'
-*      it_ranges = it_uom_selection
-*    ).
-*
+    lo_collector->add_ranges_for_name(
+      iv_name = 'MATNR'
+      it_ranges = IT_SELECTION_MATNR
+    ).
+
+    lo_collector->add_ranges_for_name(
+      iv_name = 'MTART'
+      it_ranges = IT_SELECTION_MTART
+    ).
+
 *    lo_collector->add_ranges_for_name(
 *      iv_name = 'LANGUAGE'
 *      it_ranges = it_language_selection
@@ -276,4 +282,11 @@ CLASS YCL_ALV_IDA_010 IMPLEMENTATION.
       CATCH cx_salv_ida_contract_violation.
     ENDTRY.
   ENDMETHOD.
+
+
+  method YIF_ALV_IDA~GET_FIELD_CATALOG.
+
+    RO_FIELD_CATALOG = ME->MO_ALV_WITH_IDA->FIELD_CATALOG( ).
+
+  endmethod.
 ENDCLASS.
